@@ -28,7 +28,7 @@
                 <div class="container">
                     <div class="col-md-3 mb-2 mb-md-0">
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            MaxSite
+                            Proconsult Engenharia
                         </a>
                     </div>
 
