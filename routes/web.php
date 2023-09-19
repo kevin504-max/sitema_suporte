@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\frontend\FrontEndController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,11 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontEndController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
-
+    Route::get('support-page', [FrontEndController::class, 'supportPage'])->name('support-page');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::name('dashboard.')->prefix('dashboard')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+    });
 });

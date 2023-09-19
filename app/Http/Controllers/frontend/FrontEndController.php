@@ -11,4 +11,9 @@ class FrontEndController extends Controller
     {
         return view('frontend.index');
     }
+
+    public function supportPage()
+    {
+        return view('support.index');
+    }
 }

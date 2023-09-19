@@ -20,7 +20,7 @@ class AdminMiddleware
             if (Auth::user()->role_as == "1") {
                 return $next($request);
             } else if (Auth::user()->role_as == "0") {
-                return redirect("/")->with([
+                return redirect("support-page")->with([
                     'status' => "success",
                     'message' => "Bem vindo ao painel do usuário.",
                 ]);
