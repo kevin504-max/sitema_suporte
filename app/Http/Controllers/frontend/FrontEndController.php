@@ -57,4 +57,77 @@ class FrontEndController extends Controller
             ]);
         }
     }
+
+    public function supportDetails($supportCode)
+    {
+        try {
+            if (! Auth::check()) {
+                return redirect()->back()->with([
+                    'status' => 'error',
+                    'message' => 'Faça login para continuar!'
+                ]);
+            }
+
+            $support = Support::where('code', $supportCode)->first();
+            $subjects = Subject::all();
+
+            Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' acessou os detalhes do chamado de código: ' . $supportCode . ' no sistema de atendimento.');
+            return view('support.details', compact('support', 'subjects'));
+        } catch (\Throwable $th) {
+            report ($th);
+            Log::error(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' tentou acessar os detalhes do chamado de código: ' . $supportCode . ' e falhou.', ['excpetion' => $th->getMessage()]);
+
+            return redirect()->back()->with([
+                'status' => 'error',
+                'message' => 'Ocorreu um erro ao acessar os detalhes do chamado! Tente novamente mais tarde.'
+            ]);
+        }
+    }
+
+    public function rateSupport(Request $request)
+    {
+        try {
+            if (! Auth::check()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Faça login para continuar!'
+                ]);
+            }
+
+            $support = Support::where('id', $request->support_id)->first();
+
+            if ($support->requester_id != Auth::user()->id) {
+                Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' tentou avaliar o atendimento do chamado de #ID: ' . $request->support_id . ' no sistema de atendimento.');
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Você não tem permissão para avaliar este chamado!'
+                ]);
+            } else if ($support->status != 0) {
+                Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' tentou avaliar o atendimento do chamado de #ID: ' . $request->support_id . ' no sistema de atendimento.');
+
+                return response()->json([
+                    'status' => 'info',
+                    'message' => 'Chamado não finalizado!'
+                ]);
+            }
+
+            $support->rating = $request->rating;
+            $support->save();
+
+            Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' avaliou o atendimento do chamado de #ID: ' . $request->support_id . ' no sistema de atendimento.');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Avaliação realizada com sucesso!'
+            ]);
+        } catch (\Throwable $th) {
+            report ($th);
+            Log::error(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' tentou avaliar o atendimento do chamado de #ID: ' . $request->support_id . ' e falhou.', ['excpetion' => $th->getMessage()]);
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Ocorreu um erro ao avaliar o atendimento! Tente novamente mais tarde.'
+            ]);
+        }
+    }
 }

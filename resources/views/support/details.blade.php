@@ -42,14 +42,19 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="{{ route('dashboard.supports.index') }}" class="btn btn-outline-primary btn-md p-2 m-3">Gerenciamento de chamados</a>
+                        <button class="btn btn-outline-primary btn-md p-2 m-3"
+                            class="btn btn-primary float-end"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalRatingSupport"
+                            data-support="{{ $support }}"
+                        >Avaliar chamado</button>
                         <button
                             type="button"
                             class="btn btn-primary float-end"
                             data-bs-toggle="modal"
                             data-bs-target="#modalUpdateSupport"
                             data-support="{{ $support }}"
-                        >Alterar dados do chamado</button>
+                        >Comentar chamado</button>
                     </div>
                 </div>
             </div>
@@ -57,9 +62,9 @@
 @endsection
 
 @section('modals')
-@include('admin.supports._modals')
+@include('support._modals')
 @endsection
 
 @section('scripts')
-@include('admin.supports._scripts')
+@include('support._scripts')
 @endsection

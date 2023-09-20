@@ -53,24 +53,13 @@
                                 >
                                     <i class="fa fa-eye"></i>
                                 </button>
-                                <button
-                                    class="btn btn-warning"
+                                <a
+                                    class="btn btn-secondary"
                                     type="button"
-                                    data-bs-target="#modalViewSupport"
-                                    data-bs-toggle="modal"
-                                    data-support="{{ $support }}"
+                                    href="{{ route('support.supportDetails', $support->code) }}"
                                 >
-                                    <i class="fa fa-star"></i>
-                                </button>
-                                <button
-                                    class="btn btn-danger"
-                                    type="button"
-                                    data-bs-target="#modalViewSupport"
-                                    data-bs-toggle="modal"
-                                    data-support="{{ $support }}"
-                                >
-                                    <i class="fa fa-comments"></i>
-                                </button>
+                                    <i class="fa fa-bookmark"></i>
+                                </a>
                             </td>
                         </tr>
                     @empty

@@ -105,3 +105,30 @@
         </div>
     </div>
 </div>
+
+{{-- MODAL RATING SUPPORT --}}
+<div id="modalRatingSupport" class="modal inmodal fade" tabindex="-1" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal" arial-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4>Avaliar Chamado</h4>
+            </div>
+
+            <form action="" method="POST">
+                @csrf
+                <div class="modal-body text-center" style="cursor: pointer;">
+                    @for($i = 1; $i <= 5; $i++)
+                        <i class="star far fa-star fa-2x mr-2" style="color: #ffbb33;" data-star-id="{{ $i }}"></i>
+                    @endfor
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary float-start" type="button" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

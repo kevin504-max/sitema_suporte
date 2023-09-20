@@ -11,22 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('supports', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('requester_id')->unsigned();
-            $table->foreIgn('requester_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('assistant_id')->unsigned()->nullable();
-            $table->foreIgn('assistant_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('subject_id')->unsigned();
-            $table->foreIgn('subject_id')->references('id')->on('subject')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('description');
-            $table->tinyInteger('status')->default(1);
-            $table->string('code');
-            $table->string('file')->nullable();
-            $table->tinyInteger('rating')->nullable();
-            $table->string('review')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('supports')) {
+            Schema::create('supports', function (Blueprint $table) {
+                $table->id();
+                $table->bigInteger('requester_id')->unsigned();
+                $table->foreIgn('requester_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+                $table->bigInteger('assistant_id')->unsigned()->nullable();
+                $table->foreIgn('assistant_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+                $table->bigInteger('subject_id')->unsigned();
+                $table->foreIgn('subject_id')->references('id')->on('subject')->onDelete('cascade')->onUpdate('cascade');
+                $table->string('description');
+                $table->tinyInteger('status')->default(1);
+                $table->string('code');
+                $table->string('file')->nullable();
+                $table->tinyInteger('rating')->nullable();
+                $table->string('review')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**
