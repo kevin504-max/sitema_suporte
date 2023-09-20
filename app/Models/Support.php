@@ -10,7 +10,7 @@ class Support extends Model
     use HasFactory;
 
     protected $table = 'supports';
-    protected $fillable = ['requester_id', 'assistant_id', 'subject_id', 'description', 'status', 'file', 'rating', 'review'];
+    protected $fillable = ['requester_id', 'assistant_id', 'subject_id', 'description', 'code', 'status', 'file', 'rating', 'review'];
 
     public function requester()
     {

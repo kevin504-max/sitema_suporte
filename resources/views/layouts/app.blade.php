@@ -21,6 +21,7 @@
         @livewireStyles
         <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap5.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+        <link href="{{ asset('frontend/css/select2.min.css') }}" rel="stylesheet">
     </head>
     <body class="font-sans antialiased">
         <div id="app">
@@ -125,6 +126,7 @@
 
         <script src="{{ asset('frontend/js/jquery-3.6.4.min.js') }}"></script>
         <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/select2.min.js') }}"></script>
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

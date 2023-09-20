@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subject;
+use App\Models\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -40,7 +42,11 @@ class FrontEndController extends Controller
                     'message' => 'Bem vindo ao painel do administrador!'
                 ]);
             }
-            return view('support.index');
+
+            $supports = Support::where('requester_id', Auth::user()->id)->orderBy('status', 'asc')->get();
+            $subjects = Subject::all();
+
+            return view('support.index', compact('supports', 'subjects'));
         } catch (\Throwable $th) {
             report($th);
             Log::error(Auth::user()->name . ' de #ID ' . Auth::user()->id . ', tentou acessar a página de suporte.', ['exception' => $th->getMessage()]);

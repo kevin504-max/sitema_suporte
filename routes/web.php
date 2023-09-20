@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\frontend\FrontEndController;
+use App\Http\Controllers\frontend\SupportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,10 @@ Route::get('/', [FrontEndController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('support-page', [FrontEndController::class, 'supportPage'])->name('support-page');
+
+    Route::name('support.')->prefix('support')->group(function () {
+        Route::post('store', [SupportController::class, 'store'])->name('store');
+    });
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
