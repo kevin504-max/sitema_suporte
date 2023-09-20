@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\frontend\FrontEndController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,12 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+        Route::name('subjects.')->prefix('subjects')->group(function () {
+            Route::get('index', [SubjectController::class, 'index'])->name('index');
+            Route::post('store', [SubjectController::class, 'store'])->name('store');
+            Route::put('update', [SubjectController::class, 'update'])->name('update');
+            Route::delete('destroy', [SubjectController::class, 'destroy'])->name('destroy');
+        });
     });
 });
