@@ -130,4 +130,51 @@ class FrontEndController extends Controller
             ]);
         }
     }
+
+    public function reviewSupport(Request $request)
+    {
+        try {
+            if (! Auth::check()) {
+                return redirect()->back()->with([
+                    'status' => 'error',
+                    'message' => 'Faça login para continuar!'
+                ]);
+            }
+
+            $support = Support::find($request->id);
+
+            if ($support->requester_id != Auth::user()->id) {
+                Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' tentou comentar sobere o atendimento do chamado de #ID: ' . $request->id . ' no sistema de atendimento.');
+
+                return redirect()->back()->with([
+                    'status' => 'error',
+                    'message' => 'Você não tem permissão para comentar este chamado!'
+                ]);
+            } else if ($support->status != 0) {
+                Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' tentou comentar sobere o atendimento do chamado de #ID: ' . $request->id . ' no sistema de atendimento.');
+
+                return redirect()->back()->with([
+                    'status' => 'info',
+                    'message' => 'Chamado não finalizado!'
+                ]);
+            }
+
+            $support->review = $request->review;
+            $support->save();
+
+            Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' comentou sobere o atendimento do chamado de #ID: ' . $request->id . ' no sistema de atendimento.');
+            return redirect()->back()->with([
+                'status' => 'success',
+                'message' => 'Comentário realizado com sucesso!'
+            ]);
+        } catch (\Throwable $th) {
+            report ($th);
+            Log::error(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' tentou comentar sobere o atendimento do chamado de #ID: ' . $request->id . ' e falhou.', ['excpetion' => $th->getMessage()]);
+
+            return redirect()->back()->with([
+                'status' => 'error',
+                'message' => 'Ocorreu um erro ao avaliar o atendimento! Tente novamente mais tarde.'
+            ]);
+        }
+    }
 }

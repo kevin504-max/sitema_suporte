@@ -58,13 +58,21 @@
                         icon: response.status,
                         showConfirmButton: false,
                         timer: 2500
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
                     });
+
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 3000);
                 }
-            })
+            });
         });
+    });
+
+    $("#modalReviewSupport").on("show.bs.modal", function (event) {
+        var support = $(event.relatedTarget).data("support");
+        var modal = $(this);
+
+        modal.find("#id").val(support.id);
+        modal.find("#review").val(support.review);
     });
 </script>

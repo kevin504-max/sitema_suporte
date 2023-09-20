@@ -132,3 +132,41 @@
         </div>
     </div>
 </div>
+
+{{-- MODAL REVIEW SUPPORT --}}
+<div id="modalReviewSupport" class="modal inmodal fade" tabindex="-1" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal" arial-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4>Comentar Chamado</h4>
+            </div>
+
+            <form action="{{ route('support.reviewSupport') }}" method="POST">
+                @csrf
+                <input type="hidden" name="id" id="id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="review">Deixe uma feedback sobre seu atendimento :)</label>
+                            <textarea
+                                name="review"
+                                id="review"
+                                class="form-control mt-4"
+                                placeholder="e.g. Excelente atendimento por parte do colaborador. Muito atencioso e prestativo."
+                                required
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary float-start" type="button" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

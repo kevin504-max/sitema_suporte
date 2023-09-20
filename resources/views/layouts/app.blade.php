@@ -103,7 +103,7 @@
                                         <a href="{{ route('dashboard.subjects.index') }}" class="nav-link text-secondary"><i class="fa fa-list"></i> Assuntos</a>
                                     </li>
                                     <li class="nav-item mb-2 ">
-                                        <a href="#" class="nav-link text-secondary"><i class="fa fa-handshake"></i> Chamados</a>
+                                        <a href="{{ route('dashboard.supports.index') }}" class="nav-link text-secondary"><i class="fa fa-handshake"></i> Chamados</a>
                                     </li>
                                 </ul>
                             </div>

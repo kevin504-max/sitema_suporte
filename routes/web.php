@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('store', [SupportController::class, 'store'])->name('store');
         Route::get('supportDetails/{code}', [FrontEndController::class, 'supportDetails'])->name('supportDetails');
         Route::post('rateSupport', [FrontEndController::class, 'rateSupport'])->name('rateSupport');
+        Route::post('reviewSupport', [FrontEndController::class, 'reviewSupport'])->name('reviewSupport');
     });
 });
 
