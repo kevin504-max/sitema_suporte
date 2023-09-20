@@ -2,6 +2,11 @@
 
 Bem-vindo ao Sistema de Suporte de Atendimento ao Cliente da ProConsult Engenharia! Este sistema foi projetado para fornecer uma solução completa de gerenciamento de atendimento ao cliente, permitindo que nossos clientes e colaboradores interajam de forma eficaz e eficiente.
 
+O sistema está disponível online em [aqui](https://proconsult.leklob.com/), caso queira ter uma experiência de colaborador basta logar com as seguintes credenciais:
+```bash
+    E-mail: admin@proconsult.com
+    Senha: admin123
+```
 PS: Para acessar as funcionalidades de colaborador altere a coluna "role_as" corresponde ao seu usuário na tabela "users" para 1. 
 
 ## 📌 Visão Geral
