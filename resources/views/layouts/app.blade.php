@@ -96,7 +96,7 @@
                             <div>
                                 <ul class="nav flex-column" style="font-size: 1.2rem;">
                                     <li class="nav-item mb-2">
-                                        <a href="#" class="nav-link text-secondary"><i class="fa fa-users"></i> Clientes</a>
+                                        <a href="{{ route('dashboard.users.index') }}" class="nav-link text-secondary"><i class="fa fa-users"></i> Usuários</a>
                                     </li>
                                     <li class="nav-item mb-2 ">
                                         <a href="{{ route('dashboard.subjects.index') }}" class="nav-link text-secondary"><i class="fa fa-list"></i> Assuntos</a>

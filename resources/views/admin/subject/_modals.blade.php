@@ -70,7 +70,7 @@
     </div>
 </div>
 
-{{-- MODAL DELETE PRODUCTS --}}
+{{-- MODAL DELETE SUBJECT --}}
 <div id="modalDeleteSubject" class="modal inmodal fade" tabindex="-1" role="dialog" aria-modal="true">
     <div class="modal-dialog">
         <div class="modal-content">

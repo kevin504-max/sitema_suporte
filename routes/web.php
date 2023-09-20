@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\SubjectController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\frontend\FrontEndController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
             Route::post('store', [SubjectController::class, 'store'])->name('store');
             Route::put('update', [SubjectController::class, 'update'])->name('update');
             Route::delete('destroy', [SubjectController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::name('users.')->prefix('users')->group(function () {
+            Route::get('index', [UserController::class, 'index'])->name('index');
+            Route::delete('destroy', [UserController::class, 'destroy'])->name('destroy');
         });
     });
 });
