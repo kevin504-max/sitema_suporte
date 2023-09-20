@@ -43,5 +43,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
             Route::get('index', [UserController::class, 'index'])->name('index');
             Route::delete('destroy', [UserController::class, 'destroy'])->name('destroy');
         });
+
+        Route::name('supports.')->prefix('supports')->group(function () {
+            Route::get('index', [SupportController::class, 'index'])->name('index');
+            Route::put('update', [SupportController::class, 'update'])->name('update');
+            Route::get('attend/{id}', [SupportController::class, 'attend'])->name('attend');
+        });
     });
 });
