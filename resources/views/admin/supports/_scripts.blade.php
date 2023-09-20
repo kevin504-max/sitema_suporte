@@ -19,7 +19,6 @@
 
     $("#modalUpdateSupport").on("show.bs.modal", function (event) {
         var support = $(event.relatedTarget).data("support");
-        console.log(support)
         var modal = $(this);
 
         modal.find("#id").val(support.id);

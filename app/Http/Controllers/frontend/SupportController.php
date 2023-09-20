@@ -75,7 +75,7 @@ class SupportController extends Controller
                 $support->file = $fileName;
             }
 
-            $support->update();
+            $support->save();
 
             Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' atualizou o chamado de #ID ' . $support->id . ', no sistema de atendimento.');
             return redirect()->back()->with([
@@ -111,12 +111,19 @@ class SupportController extends Controller
             }
 
             $support = Support::find($supportId);
-            $support->assistant_id = Auth::user()->id;
-            $support->status = 2;
+
+            if ($support->status == 1 && $support->assistant_id == null) {
+                $support->assistant_id = Auth::user()->id;
+                $support->status = 2;
+            }
+
             $support->update();
 
+            $subjects = Subject::orderBy('created_at', 'desc')->get();
+            $assistants = User::where('role_as', 1)->get();
+
             Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' iniciou o atentimento do chamado de #ID ' . $supportId . ' no sistema de atendimento.');
-            return view('admin.supports.attend', compact('support'));
+            return view('admin.supports.attend', compact('support', 'subjects', 'assistants'));
         } catch (\Throwable $th) {
             report ($th);
             Log::error(Auth::user()->name . ' de #ID ' . Auth::user()->id . ' tentou atender o chamado de #ID ' . $supportId . ' e falhou.', ['excpetion' => $th->getMessage()]);

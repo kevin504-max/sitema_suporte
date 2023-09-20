@@ -54,6 +54,12 @@
                                 >
                                     <i class="fa fa-pen"></i>
                                 </button>
+                                <a
+                                    class="btn btn-secondary"
+                                    href="{{ route('dashboard.supports.attend', ['id' => $support->id]) }}"
+                                >
+                                    <i class="fa fa-eye"></i>
+                                </a>
                             </td>
                         </tr>
                     @empty
