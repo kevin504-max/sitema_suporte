@@ -2,6 +2,8 @@
 
 Bem-vindo ao Sistema de Suporte de Atendimento ao Cliente da ProConsult Engenharia! Este sistema foi projetado para fornecer uma solução completa de gerenciamento de atendimento ao cliente, permitindo que nossos clientes e colaboradores interajam de forma eficaz e eficiente.
 
+PS: Para acessar as funcionalidades de colaborador altere a coluna "role_as" corresponde ao seu usuário na tabela "users" para 1. 
+
 ## 📌 Visão Geral
 
 Este sistema utiliza tecnologias modernas para criar uma plataforma de atendimento ao cliente robusta e de fácil utilização. Com ele, você pode:
