@@ -21,12 +21,11 @@
 
         });
         var modal = $(this);
+        var support = $(event.relatedTarget).data("support");
 
-        var rating = '{{ $support->rating }}';
-
-        if (rating != null) {
+        if (support.rating != null) {
             modal.find(".star").filter(function () {
-                return $(this).data("star-id") <= rating;
+                return $(this).data("star-id") <= support.rating;
             }).removeClass("far").addClass("fas");
         }
 
@@ -48,7 +47,7 @@
                 method: "POST",
                 data: {
                     _token: "{{ csrf_token() }}",
-                    support_id: "{{ $support->id }}",
+                    support_id: support.id,
                     rating: selectedStarId
                 },
                 success: function (response) {

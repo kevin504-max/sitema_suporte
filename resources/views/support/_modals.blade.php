@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
                     <button class="btn btn-primary" type="submit">Abrir Chamado</button>
                 </div>
             </form>
