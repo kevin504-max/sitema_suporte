@@ -4,16 +4,51 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class FrontEndController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        try {
+            return view('frontend.index');
+        } catch (\Throwable $th) {
+            report($th);
+            Log::error('Erro ao acessar página inicial.', ['exception' => $th->getMessage()]);
+
+            return redirect()->back()->with([
+                'status' => 'error',
+                'message' => 'Erro ao acessar página inicial! Tente novamente.'
+            ]);
+        }
     }
 
     public function supportPage()
     {
-        return view('support.index');
+        try {
+            if (! Auth::check()) {
+                return redirect()->route('login')->with([
+                    'status' => 'error',
+                    'message' => 'Você precisa estar logado para acessar o sistema!'
+                ]);
+            } else if (Auth::user()->role_as == 1) {
+                Log::info(Auth::user()->name . ' de #ID ' . Auth::user()->id . ', tentou acessar a página de suporte.');
+
+                return redirect()->route('dashboard.index')->with([
+                    'status' => 'success',
+                    'message' => 'Bem vindo ao painel do administrador!'
+                ]);
+            }
+            return view('support.index');
+        } catch (\Throwable $th) {
+            report($th);
+            Log::error(Auth::user()->name . ' de #ID ' . Auth::user()->id . ', tentou acessar a página de suporte.', ['exception' => $th->getMessage()]);
+
+            return redirect()->back()->with([
+                'status' => 'error',
+                'message' => 'Erro ao acessar página de suporte! Tente novamente.'
+            ]);
+        }
     }
 }
